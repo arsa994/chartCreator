@@ -1,6 +1,6 @@
-# chart-creator
+#chartLAB
 
-> chart creator with vue.js
+> Chart creator app with vue.js and chart.js
 
 ## Build Setup
 
