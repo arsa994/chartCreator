@@ -1,4 +1,4 @@
-#chartLAB
+## chartLAB
 
 > Chart creator app with vue.js and chart.js
 
