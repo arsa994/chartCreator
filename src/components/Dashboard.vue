@@ -222,7 +222,7 @@
             <button type="button" class="btn btn-secondary btn-lg btn-block disabled">Preview chart</button>
           </div>
         </div>
-        <div class="container">
+        <div class="chart-container">
           <div id="chart-preview">
             <button type="button" class="close" aria-label="Close" @click="hideChart()">
               <span aria-hidden="true">&times;</span>
@@ -832,8 +832,6 @@ export default {
       let pngFormat = document.querySelector('#png').checked;
       let jpgFormat = document.querySelector('#jpg').checked;
 
-      //this.imageOptions.format = '';
-
       if(pngFormat){
         this.format = pngValue;
       }else{
@@ -848,8 +846,6 @@ export default {
       let lowOption = document.querySelector('#low').checked;
       let mediumOption = document.querySelector('#medium').checked;
       let highOption = document.querySelector('#high').checked;
-
-      //this.imageOptions.quality = '';
 
       if(lowOption){
         this.quality = Number(imgLow);
