@@ -222,7 +222,7 @@
             <button type="button" class="btn btn-secondary btn-lg btn-block disabled">Preview chart</button>
           </div>
         </div>
-        <div class="chart-container">
+        <div class="row">
           <div id="chart-preview">
             <button type="button" class="close" aria-label="Close" @click="hideChart()">
               <span aria-hidden="true">&times;</span>
@@ -230,8 +230,10 @@
             <div id="chart">
               <canvas id="myChart"></canvas>
             </div>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#file-options">Save chart as img file</button>
-            <button type="button" class="btn btn-secondary btn-lg" @click="hideChart()">Close</button>
+            <div class="btn-group float-right">
+              <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#file-options">Save chart as img file</button>
+              <button type="button" class="btn btn-secondary btn-lg float-right" @click="hideChart()">Close</button>
+            </div>
           </div>
         </div>
         <div class="modal fade" id="file-options" tabindex="-1" role="dialog" aria-hidden="true">
@@ -899,13 +901,24 @@ h1{
   background-color: white;
 }
 
-#chart-preview{
-  width: 80%;
-  height: 0;
-  background-color: #ffffff;
+.chart-preview-button{
   position: fixed;
+  width: 100%;
   bottom: 0;
-  transition: height 0.3s;
+  left: 0;
+}
+
+#chart-preview{
+  position: fixed;
+  width: 85%;
+  height: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  transition: height 0.5s;
 }
 
 .alert{
