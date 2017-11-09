@@ -2,8 +2,8 @@
   <div class="home">
     <div class="container">
       <div class="jumbotron">
-        <h1 class="display-1">ChartLAB</h1>
-        <p class="lead">Create data visualization with ChartLAB!</p>
+        <h1 id="title-header" class="display-1">ChartLAB</h1>
+        <p id="title-description" class="lead">Create data visualization with ChartLAB!</p>
         <router-link to="/dashboard"><div class="btn btn-primary btn-lg">Go to chart creator</div></router-link>
       </div>
     </div>
@@ -28,5 +28,15 @@ export default {
 
 .lead{
   margin-bottom: 100px;
+}
+
+.btn-primary{
+  background: linear-gradient(to right, #0099ff, #00ccff);
+  border: none;
+  border-radius: 0;
+}
+
+#title-header, #title-description{
+  
 }
 </style>

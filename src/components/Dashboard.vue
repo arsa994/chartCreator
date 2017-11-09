@@ -1,40 +1,88 @@
 <template>
-  <div class="dashboard">
+  <div class="wrapper">
     <div class="container">
-      <form>
-        <div class="chart-section">
-          <div class="form-row justify-content-between">
-            <div class="form-group col-md-6">
-              <h1 class="display-4">Select chart type:</h1>
-              <select id="select-chart" class="form-control" @change="selectChart(), sendChartType()">
-                <option value="">Chose type</option>
-                <option value="bar">Bar</option>
-                <option value="line">Line</option>
-                <option value="pie">Pie</option>
-                <option value="doughnut">Doughnut</option>
-                <option value="bubble">Bubble</option>
-              </select>
-            </div>
-            <div class="form-group col-md-2">
-              <img id="chart-img" src="" alt="">
-            </div>
+      <div class="chart-section">
+        <div class="form-row justify-content-between">
+          <div class="form-group col-md-12">
+            <h1 class="section-heading display-4">Select chart type:</h1>
+          </div>
+          <div class="form-group col-md-6">
+            <select id="select-chart" class="form-control form-control-lg" @change="selectChart(), sendChartType()">
+              <option value="">Chose type</option>
+              <option value="bar">Bar</option>
+              <option value="line">Line</option>
+              <option value="pie">Pie</option>
+              <option value="doughnut">Doughnut</option>
+              <option value="bubble">Bubble</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <img id="chart-img" src="" alt="">
           </div>
         </div>
-        <hr>
-        <div class="chart-section">
-          <div class="form-row">
-            <div class="col-auto col-md-8">
-              <h1 class="display-4">Insert data:</h1>
-              <label for="">Current number of data sets: <strong>{{ data.length }}</strong></label>
-              <div class="row">
-                <div class="col-auto"><input id="dataInput" class="form-control" name="dataInput" v-model="dataSet.row"></div>
-                <div class="col-auto"><button type="button" id="add-data" class="btn btn-primary" @click="addDataSet()">Add data</button></div>
-                <div class="col-auto"><button type="button" class="btn btn-danger" @click="deleteDataSet()">Delete data</button></div>
-                <div class="col-auto"><button type="button" class="btn btn-danger" @click="deleteAllData()">Delete all</button></div>
-              </div>
-            </div>
+      </div>
+      <hr>
+      <div class="chart-section">
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <h1 class="section-heading display-4">Insert data:</h1>
           </div>
-          <div id="data-alert" class="alert alert-warning">Maximum number of data sets: <strong>50</strong>!</div>
+          <div id="dataset-input" class="form-group col-md-4">
+            <label id="select-data-label">Select number of data sets</label>
+            <select id="dataInput" class="form-control form-control-lg" type="text" @change="addDataSet()">
+              <option value="">Chose option</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+              <option value="32">32</option>
+              <option value="33">33</option>
+              <option value="34">34</option>
+              <option value="35">35</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39">39</option>
+              <option value="40">40</option>
+              <option value="41">41</option>
+              <option value="42">42</option>
+              <option value="43">43</option>
+              <option value="44">44</option>
+              <option value="45">45</option>
+              <option value="46">46</option>
+              <option value="47">47</option>
+              <option value="48">48</option>
+              <option value="49">49</option>
+              <option value="50">50</option>
+            </select>
+          </div>
         </div>
         <div v-if="chartType == 'bubble'">
           <div v-for="dataSet in data">
@@ -98,34 +146,26 @@
             </div>
           </div>
         </div>
-        <hr>
-        <div class="chart-section">
-          <div class="form-row">
-            <h1 class="display-4">Customize chart:</h1>
+      </div>
+      <hr>
+      <div class="chart-section">
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <h1 class="section-heading display-4">Customize chart:</h1>
           </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>Select color theme:</label>
-                <select id="color-theme" class="form-control" @change="chartTheme()">
-                  <option value="">Chose option</option>
-                  <option value="light">light</option>
-                  <option value="dark">dark</option>
-                </select>
-            </div>
-            <div v-if="chartType == 'bar'" class="clearBar form-group col-md-6">
-              <label>Select group color:</label>
-                <select id="bar-group-color" class="form-control" @click="barGroupColor()">
-                  <option value="">Chose option</option>
-                  <option value="red">red</option>
-                  <option value="yellow">yellow</option>
-                  <option value="blue">blue</option>
-                  <option value="green">green</option>
-                  <option value="grey">grey</option>
-                </select>
-            </div>
-            <div v-else-if="chartType == 'line'" class="form-group col-md-6">
-              <label>Select group color:</label>
-              <select id="line-group-color" class="form-control" @change="lineGroupColor()">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label>Select color theme:</label>
+              <select id="color-theme" class="form-control" @change="chartTheme()">
+                <option value="">Chose option</option>
+                <option value="light">light</option>
+                <option value="dark">dark</option>
+              </select>
+          </div>
+          <div v-if="chartType == 'bar'" class="clearBar form-group col-md-3">
+            <label>Select group color:</label>
+              <select id="bar-group-color" class="form-control" @click="barGroupColor()">
                 <option value="">Chose option</option>
                 <option value="red">red</option>
                 <option value="yellow">yellow</option>
@@ -133,175 +173,176 @@
                 <option value="green">green</option>
                 <option value="grey">grey</option>
               </select>
-            </div>
-            <div v-else></div>
           </div>
-          <div class="form-row">
-            <div v-if="chartType == 'bar' || chartType == 'line'" class="form-group col-md-6">
-              <label>Data group name:</label>
-              <input id="group-name" class="form-control">
-            </div>
-            <div class="form-group col-md-6">
-              <label>Font size:</label>
-              <select id="font-size" class="form-control" @change="fSize()">
-                <option value="12">Chose option</option>
-                <option value="13">13px</option>
-                <option value="14">14px</option>
-                <option value="15">15px</option>
-                <option value="16">16px</option>
-                <option value="17">17px</option>
-                <option value="18">18px</option>
-              </select>
-            </div>
+          <div v-else-if="chartType == 'line'" class="form-group col-md-3">
+            <label>Select group color:</label>
+            <select id="line-group-color" class="form-control" @change="lineGroupColor()">
+              <option value="">Chose option</option>
+              <option value="red">red</option>
+              <option value="yellow">yellow</option>
+              <option value="blue">blue</option>
+              <option value="green">green</option>
+              <option value="grey">grey</option>
+            </select>
           </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>Legend position:</label>
-              <select id="legend-position" class="form-control">
-                <option value="">Chose option</option>
-                <option value="top">top</option>
-                <option value="left">left</option>
-                <option value="bottom">bottom</option>
-                <option value="right">right</option>
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label>Title:</label>
-              <input id="title" class="form-control">
-            </div>
+          <div v-else></div>
+        </div>
+        <div class="form-row">
+          <div v-if="chartType == 'bar' || chartType == 'line'" class="form-group col-md-3">
+            <label>Data group name:</label>
+            <input id="group-name" class="form-control">
           </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>Title position:</label>
-              <select id="title-position" class="form-control">
-                <option value="">Chose option</option>
-                <option value="top">top</option>
-                <option value="left">left</option>
-                <option value="bottom">bottom</option>
-                <option value="right">right</option>
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label id="font-preview">Font family:</label>
-              <select id="font-family" class="form-control" @change="fFamily(), sendFontFamily()">
-                <option value="">Chose option</option>
-                <option value="Arial">Arial</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Palatino">Palatino</option>
-                <option value="Garamond">Garamond</option>
-              </select>
-            </div>
-          </div>
-          <div v-if="chartType == 'line'">
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" id="fillCheckbox" class="custom-control-input" @change="fillUnderline()">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Fill area under line:</span>
-            </label>
+          <div class="form-group col-md-3">
+            <label>Title font size (px):</label>
+            <input type="number" id="font-size" class="form-control" min="12" max="20" @change="fSize()">
           </div>
         </div>
-        <hr>
-        </form>
-        <div v-if="chartType != '' && this.data != ''">
-          <div class="chart-preview-button">
-            <div v-if="chartType == 'pie' || chartType == 'doughnut'">
-              <button type="button" class="btn btn-primary btn-lg btn-block" @click="sendData(), sendColor(), sendLegend(), sendTitle(), generateChart(), showChart()">Preview chart</button>
-            </div>
-            <div v-else-if="chartType == 'bubble'">
-              <button type="button" class="btn btn-primary btn-lg btn-block" @click="sendData(), sendLegend(), sendTitle(), generateChart(), showChart()">Preview chart</button>
-            </div>
-            <div v-else>
-              <button type="button" class="btn btn-primary btn-lg btn-block" @click="sendData(), dataGroupName(), sendLegend(), sendTitle(), generateChart(), showChart()">Preview chart</button>
-            </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label>Legend position:</label>
+            <select id="legend-position" class="form-control">
+              <option value="">Chose option</option>
+              <option value="top">top</option>
+              <option value="left">left</option>
+              <option value="bottom">bottom</option>
+              <option value="right">right</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label>Title:</label>
+            <input id="title" class="form-control">
           </div>
         </div>
-        <div v-else>
-          <div class="chart-preview-button">
-            <button type="button" class="btn btn-secondary btn-lg btn-block disabled">Preview chart</button>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label>Title position:</label>
+            <select id="title-position" class="form-control">
+              <option value="">Chose option</option>
+              <option value="top">top</option>
+              <option value="left">left</option>
+              <option value="bottom">bottom</option>
+              <option value="right">right</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label id="font-preview">Font family:</label>
+            <select id="font-family" class="form-control" @change="fFamily(), sendFontFamily()">
+              <option value="">Chose option</option>
+              <option value="Arial">Arial</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Palatino">Palatino</option>
+              <option value="Garamond">Garamond</option>
+            </select>
           </div>
         </div>
-        <div class="row">
-          <div id="chart-preview">
-            <button type="button" class="close" aria-label="Close" @click="hideChart()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <div id="chart">
-              <canvas id="myChart"></canvas>
-            </div>
-            <div class="btn-group float-right">
-              <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#file-options">Save chart as img file</button>
-              <button type="button" class="btn btn-secondary btn-lg float-right" @click="hideChart()">Close</button>
-            </div>
+        <div v-if="chartType == 'line'">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" id="fillCheckbox" class="custom-control-input" @change="fillUnderline()">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Fill area under line:</span>
+          </label>
+        </div>
+      </div>
+      <hr>
+      </form>
+      <div v-if="chartType != '' && this.data != ''">
+        <div class="chart-preview-button">
+          <div v-if="chartType == 'pie' || chartType == 'doughnut'">
+            <button type="button" class="btn btn-primary btn-lg btn-block" @click="sendData(), sendColor(), sendLegend(), sendTitle(), generateChart(), showChart()">Preview chart</button>
+          </div>
+          <div v-else-if="chartType == 'bubble'">
+            <button type="button" class="btn btn-primary btn-lg btn-block" @click="sendData(), sendLegend(), sendTitle(), generateChart(), showChart()">Preview chart</button>
+          </div>
+          <div v-else>
+            <button type="button" class="btn btn-primary btn-lg btn-block" @click="sendData(), dataGroupName(), sendLegend(), sendTitle(), generateChart(), showChart()">Preview chart</button>
           </div>
         </div>
-        <div class="modal fade" id="file-options" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h2 class="modal-title">Save chart as image file</h2>
-              </div>
-              <div class="modal-body">
-                <form  @change="imageFormat()">
-                  <div class="form-group">
-                    <div class="container">
-                      <h4 class="">Image format:</h4>
-                      <label class="custom-control custom-radio">
-                        <input id="png" name="radio" type="radio" value=".png" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">.png</span>
-                      </label>
-                      <label class="custom-control custom-radio">
-                        <input id="jpg" name="radio" type="radio" value=".jpeg" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">.jpeg</span>
-                      </label>
-                    </div>
-                  </div>
-                </form>
-                <form @change="imageQuality()">
-                  <div class="form-group">
-                    <div class="container">
-                      <h4 class="">Image quality:</h4>
-                      <label class="custom-control custom-radio">
-                        <input id="low" name="radio" type="radio" value="0.1" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Low</span>
-                      </label>
-                      <label class="custom-control custom-radio">
-                        <input id="medium" name="radio" type="radio" value="0.5" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Medium</span>
-                      </label>
-                      <label class="custom-control custom-radio">
-                        <input id="high" name="radio" type="radio" value="1" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">High</span>
-                      </label>
-                    </div>
-                  </div>
-                </form>
-                <div class="">
+      </div>
+      <div v-else>
+        <div class="chart-preview-button">
+          <button type="button" class="btn btn-secondary btn-lg btn-block disabled">Preview chart</button>
+        </div>
+      </div>
+      <div class="row">
+        <div id="chart-preview">
+          <button type="button" class="close" aria-label="Close" @click="hideChart()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div id="chart">
+            <canvas id="myChart"></canvas>
+          </div>
+          <div class="btn-group float-right">
+            <button type="button" class="btn btn-outline-primary btn-lg float-right" data-toggle="modal" data-target="#file-options">Save chart as img file</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg float-right" @click="hideChart()">Close</button>
+          </div>
+        </div>
+      </div>
+      <div id="file-options" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title">Save chart as image file</h2>
+            </div>
+            <div class="modal-body">
+              <form  @change="imageFormat()">
+                <div class="form-group">
                   <div class="container">
-                    <h4 class="">File name:</h4>
-                    <div class="row">
-                      <input type="text" id="file-name" class="form-control form-control-sm col-sm-3">
-                      <strong>{{ this.format }}</strong>
-                    </div>
+                    <h4 class="">Image format:</h4>
+                    <label class="custom-control custom-radio">
+                      <input id="png" name="radio" type="radio" value=".png" class="custom-control-input">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">.png</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                      <input id="jpg" name="radio" type="radio" value=".jpeg" class="custom-control-input">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">.jpeg</span>
+                    </label>
                   </div>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success" @click="fileName(), saveAsImage()">Save file</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
+              </form>
+              <form @change="imageQuality()">
+                <div class="form-group">
+                  <div class="container">
+                    <h4 class="">Image quality:</h4>
+                    <label class="custom-control custom-radio">
+                      <input id="low" name="radio" type="radio" value="0.1" class="custom-control-input">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">Low</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                      <input id="medium" name="radio" type="radio" value="0.5" class="custom-control-input">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">Medium</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                      <input id="high" name="radio" type="radio" value="1" class="custom-control-input">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">High</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="container">
+                  <h4 class="">File name:</h4>
+                  <div class="row">
+                    <input type="text" id="file-name" class="form-control form-control-sm col-sm-3">
+                    <strong>{{ this.format }}</strong>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-success" @click="fileName(), saveAsImage()">Save file</button>
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
 export default {
@@ -382,33 +423,14 @@ export default {
     },
     addDataSet: function() {
       let dataQuantity = document.querySelector('#dataInput').value;
-      let dataAlert = document.querySelector('#data-alert').style;
-      let timer = null;
 
-      function setWarning(){
-        timer = setTimeout(function(){
-          dataAlert.display = 'none';
-        }, 3000);
-      }
+      this.data.splice(0, this.data.length);
 
       for(let i = 0; i < dataQuantity; i++){
-        if(this.data.length >= 50 || dataQuantity >= 51){
-          dataAlert.display = 'block';
-          clearTimeout(timer);
-          setWarning();
-        }else{
-          this.data.push({
-            row: this.dataSet.row
-          });
-        }
+        this.data.push({
+          row: this.dataSet.row
+        });
       }
-      this.dataSet.row = '';
-    },
-    deleteDataSet: function() {
-      this.data.splice(-1, 1);
-    },
-    deleteAllData: function() {
-      this.data.splice(0, this.data.length);
     },
     chartTheme: function() {
       let bgColor = document.querySelector('#color-theme').value;
@@ -619,7 +641,7 @@ export default {
       let color = document.querySelectorAll('.color');
 
       this.dataColor.splice(0, this.dataColor.length);
-      this.dataBorderColor.splice(0, this.dataBorderColor);
+      this.dataBorderColor.splice(0, this.dataBorderColor.length);
 
       for(let i = 0; i < this.data.length; i++){
         this.dataColor.push(color[i].value);
@@ -885,8 +907,36 @@ h1{
   margin-bottom: 10px;
 }
 
+hr{
+  margin: 80px 0 80px 0;
+}
+
+.btn{
+  border-radius: 0;
+}
+
+#select-data-label{
+  font-size: 22px;
+}
+
+#dataset-input{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.section-heading{
+  margin-bottom: 25px;
+  color: white;
+  background: linear-gradient(to right, #0099ff, #00ccff);
+  padding: 15px 0 15px 5px;
+}
+
+#select-chart{
+  margin-top: 60px;
+}
+
 .chart-section{
-  min-height: 144px;
+  min-height: 285px;
   margin: 30px 0 30px 0;
 }
 
@@ -908,6 +958,11 @@ h1{
   left: 0;
 }
 
+.btn-primary{
+  background: linear-gradient(to right, #0099ff, #00ccff);
+  border: none;
+}
+
 #chart-preview{
   position: fixed;
   width: 85%;
@@ -915,17 +970,10 @@ h1{
   margin-left: auto;
   margin-right: auto;
   background-color: #ffffff;
+  box-shadow: 0 0 30px #000000;
   right: 0;
   left: 0;
   bottom: 0;
   transition: height 0.5s;
-}
-
-.alert{
-  margin: 15px 0 15px 0;
-}
-
-#data-alert{
-  display: none;
 }
 </style>
